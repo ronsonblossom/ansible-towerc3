@@ -1,0 +1,210 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "customVmName": {
+      "type": "default",
+      "value": "testserver971",
+      "metadata": {
+        "description": "This is the name of the your VM"
+      }
+    },
+    "diagnosticsStorageAccountName": {
+      "type": "string",
+      "value": "test001diag007",
+      "metadata": {
+        "description": "Provide the existing storage account name"
+      }
+    },
+    "diagnosticsStorageAccountResourceGroupName": {
+      "type": "string",
+      "value": "eyc3wintestrg",
+      "metadata": {
+        "description": "Resource group of the existing storage account"
+      }
+    },
+    "imageName": {
+      "type": "string",
+      "value": "linux-image02",
+      "metadata": {
+        "description": "Name of your Image"
+      }
+    },
+    "osDiskVhdUri": {
+      "type": "string",
+      "value": "https://eyc3wintestrgdisks295.blob.core.windows.net/system/Microsoft.Compute/Images/images/packer-osDisk.97cdba64-9c4b-4a78-b827-bb8b474e5021.vhd",
+      "metadata": {
+        "description": "Uri of the your user image"
+      }
+    },
+    "adminUserName": {
+      "type": "string",
+      "value": "osadmin",
+      "metadata": {
+        "description": "User Name for the Virtual Machine"
+      }
+    },
+    "adminPassword": {
+      "type": "string",
+      "value": "Apple@123456789",
+      "metadata": {
+        "description": "Password for the Virtual Machine"
+      }
+    },
+    "adminPublicKey": {
+      "type": "string",
+      "value": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAigG4vaUTXlp0V9jChE4uyCWmM6/LTaJ1vg0CS0WkiPx3YoFENXFtR7a13CKgGd20Mjckv52SODf0ulTJbUEQ2XoVjKU4MyJtps1pI3lFowZffz83vqhOr6AApaSExdbQlaKnz4W0l/SHgUr5EI/tDkqpc2XLleG7GfkUJ/Pz69NwcLfw47kS2ryWNooma5i37Rsq8UwF4h7nmr8E9ddhhQet0upls8ELkRpXCQvw5SFY+X67hbLO4/XRHIe4H64W1GphUwbSJ90Tmyil6ZH3nGq16Qxoo5FL77oXrtfy7BdnMuN5GjLbaY2rGg0gT/gZJ/nFOw3XgYGNkdZnrD41iQ==",
+      "metadata": {
+        "description": "SSH Key for the Virtual Machine"
+      }
+    },
+    "osType": {
+      "allowedValues": [
+        "Windows",
+        "Linux"
+      ],
+      "type": "string",
+      "value": "Linux",
+      "metadata": {
+        "description": "This is the OS that your VM will be running"
+      }
+    },
+    "vmSize": {
+      "type": "string",
+      "value": "Standard_A4",
+      "metadata": {
+        "description": "This is the size of your VM"
+      }
+    },
+    "newOrExistingVnet": {
+      "allowedValues": [
+        "new",
+        "existing"
+      ],
+      "type": "string",
+      "value": "existing",
+      "metadata": {
+        "description": "Select if this template needs a new VNet or will reference an existing VNet"
+      }
+    },
+    "newOrExistingVnetName": {
+      "value": "eyc3wintestrg-vnet",
+      "type": "string",
+      "metadata": {
+        "description": "New or Existing VNet Name"
+      }
+    },
+    "subnetName": {
+      "value": "default",
+      "type": "string",
+      "metadata": {
+        "description": "New or Existing subnet Name"
+      }
+    },
+    "existingRecoveryServicesVault": {
+      "value": "eyc3wintestbv",
+      "type": "string",
+      "metadata": {
+        "description": "Recovery Vault Name"
+      }
+    },
+    "existingBackupPolicy": {
+      "value": "DefaultPolicy",
+      "type": "string",
+      "metadata": {
+        "description": "Recovery Policy Name"
+      }
+    },
+    "VirtualMachinesResourceGroup": {
+      "type": "string",
+      "value": "eyc3wintestrg",
+      "metadata": {
+        "description": "This is the name of the ResourceGroup Name"
+      }
+    },
+    "omsagentlocation": {
+      "value": "https://gist.githubusercontent.com/retkrish/be804082ecdb07112ff13ea3567775bb/raw/dc3fb07012d764e01a04ca4e3b1d40b9d3122373/omsinstall.sh",
+      "type": "string",
+      "metadata": {
+        "description": "The base URI where oms required by this template are located. When the template is deployed using the accompanying scripts, a private location in the subscription will be used and this value will be automatically generated."
+      }
+    },
+    "availabilitySetName": {
+      "type": "string",
+      "value": "testserverlinmgAvailabilitySet01",
+      "metadata": {
+        "description": "This is the Availability Set"
+      }
+    },
+    "aadClientID": {
+      "type": "string",
+      "value": "f868e630-6b43-4ed7-87d4-cc03be9e8846",
+      "metadata": {
+        "description": "This is the ClientID of the AAD application used to intergate with KeyVault"
+      }
+    },
+    "aadClientSecret": {
+      "type": "securestring",
+      "value": "eyc3wintestSecret",
+      "metadata": {
+        "description": "This is the Client Secret of the above mentioned AAD Client"
+      }
+    },
+    "encryptionOperation": {
+      "type": "string",
+      "value": "EnableEncryption",
+      "metadata": {
+        "description": "EnableEncryption would encrypt the disks in place and EnableEncryptionFormat would format the disks directly"
+      }
+    },
+    "volumeType": {
+      "type": "string",
+      "value": "Data",
+      "metadata": {
+        "description": "Defines which drives should be encrypted. OS encryption is supported on RHEL 7.2, CentOS 7.2 & Ubuntu 16.04."
+      }
+    },
+    "keyEncryptionKeyURL": {
+      "type": "string",
+      "value": "https://eyc3wintestkv.vault.azure.net/keys/eyc3wintestKEK/9d1cbaaeb1db46c492cf3c84d99f174b",
+      "metadata": {
+        "description": "This is the URL of KEK"
+      }
+    },
+    "keyVaultName": {
+      "type": "string",
+      "value": "eyc3wintestkv",
+      "metadata": {
+        "description": "This is the name of the keyVault"
+      }
+    },
+    "keyVaultResourceGroup": {
+      "type": "string",
+      "value": "eyc3wintestrg",
+      "metadata": {
+        "description": "This is the name of the ResourceGroup in which KeyVault exist"
+      }
+    },
+    "sequenceVersion": {
+      "type": "string",
+      "value": "1",
+      "metadata": {
+        "description": "sequence version of the bitlocker operation. Increment this everytime an operation is performed on the same VM"
+      }
+    },
+    "useKek": {
+      "type": "string",
+      "value": "kek",
+      "metadata": {
+        "description": "This is the Key Encryption Key"
+      }
+    },
+    "sizeofdatadiskGB": {
+      "type": "string",
+      "value": "10",
+      "metadata": {
+        "description": "size of data disk in GB"
+      }
+    }
+  }
+}

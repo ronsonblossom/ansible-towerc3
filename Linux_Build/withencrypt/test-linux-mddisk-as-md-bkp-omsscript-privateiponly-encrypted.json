@@ -1,0 +1,359 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "customVmName": {
+            "type": "string",
+            "metadata": {
+                "description": "This is the name of the your VM"
+            }
+        },
+        "diagnosticsStorageAccountName": {
+            "type": "string",
+            "metadata": {
+                "description": "Provide the existing storage account name"
+            }
+        },
+        "diagnosticsStorageAccountResourceGroupName": {
+            "type": "string",
+            "metadata": {
+                "description": "Resource group of the existing storage account"
+            }
+        },
+        "imageName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of your Image"
+            }
+        },
+
+        "osDiskVhdUri": {
+            "type": "string",
+            "metadata": {
+                "description": "Uri of the your user image"
+            }
+        },
+        "adminUserName": {
+            "type": "string",
+            "metadata": {
+                "description": "User Name for the Virtual Machine"
+            }
+        },
+        "adminPassword": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Password for the Virtual Machine"
+            }
+        },
+        "osType": {
+            "allowedValues": [
+                "Windows",
+                "Linux"
+            ],
+            "type": "string",
+            "metadata": {
+                "description": "This is the OS that your VM will be running"
+            }
+        },
+        "vmSize": {
+            "type": "string",
+            "metadata": {
+                "description": "This is the size of your VM"
+            }
+        },
+        "newOrExistingVnet": {
+            "allowedValues": [
+                "new",
+                "existing"
+            ],
+            "type": "string",
+            "metadata": {
+                "description": "Select if this template needs a new VNet or will reference an existing VNet"
+            }
+        },
+        "newOrExistingVnetName": {
+            "type": "string",
+            "metadata": {
+                "description": "New or Existing VNet Name"
+            }
+        },
+        "subnetName": {
+            "type": "string",
+            "metadata": {
+                "description": "New or Existing subnet Name"
+            }
+        },
+        "adminPublicKey": {
+            "type": "string",
+            "metadata": {
+                "description": "SSH Key for the Virtual Machine"
+            }
+        },
+        "existingRecoveryServicesVault": {
+            "type": "string",
+            "metadata": {
+                "description": "Recovery Vault Name"
+            }
+        },
+        "existingBackupPolicy": {
+            "type": "string",
+            "metadata": {
+                "description": "Recovery Policy Name"
+            }
+        },
+        "VirtualMachinesResourceGroup": {
+        "type": "string",
+        "metadata": {
+            "description": "This is the name of the ResourceGroup Name"
+        }
+    },
+        "omsagentlocation": {
+            "type": "string",
+            "metadata": {
+                "description": "The base URI where oms required by this template are located. When the template is deployed using the accompanying scripts, a private location in the subscription will be used and this value will be automatically generated."
+            }
+        },
+        "availabilitySetName": {
+            "type": "string",
+            "metadata": {
+                "description": "This is the Availability Set"
+            }
+        },
+        "aadClientID": {
+            "type": "string",
+            "metadata": {
+                "description": "This is the ClientID of the AAD application used to intergate with KeyVault"
+            }
+        },
+        "aadClientSecret": {
+            "type": "securestring",
+            "metadata": {
+                "description": "This is the Client Secret of the above mentioned AAD Client"
+            }
+        },
+        "encryptionOperation": {
+            "type": "string",
+            "metadata": {
+                "description": "EnableEncryption would encrypt the disks in place and EnableEncryptionFormat would format the disks directly"
+            }
+        },
+        "volumeType": {
+            "type": "string",
+            "metadata": {
+                "description": "Defines which drives should be encrypted. OS encryption is supported on RHEL 7.2, CentOS 7.2 & Ubuntu 16.04."
+            }
+        },
+        "keyEncryptionKeyURL": {
+            "type": "string",
+            "metadata": {
+                "description": "This is the URL of KEK"
+            }
+        },
+        "keyVaultName": {
+            "type": "string",
+            "metadata": {
+                "description": "This is the name of the keyVault"
+            }
+        },
+        "keyVaultResourceGroup": {
+            "type": "string",
+            "metadata": {
+                "description": "This is the name of the ResourceGroup in which KeyVault exist"
+            }
+        },
+        "sequenceVersion": {
+            "type": "string",
+            "metadata": {
+                "description": "sequence version of the bitlocker operation. Increment this everytime an operation is performed on the same VM"
+            }
+        },
+        "useKek": {
+            "type": "string",
+            "metadata": {
+                "description": "This is the Key Encryption Key"
+            }
+        },
+        "sizeofdatadiskGB": {
+            "type": "string",
+            "metadata": {
+                "description": "size of data disk in GB"
+            }
+        }
+    },
+    "variables": {
+        "vmName": "[parameters('customVmName')]",
+        "osDiskName": "[concat(parameters('customVmName'),'-OSDisk')]",
+        "nicName": "[concat(parameters('customVmName'),'Nic')]",
+        "apiVersion": "2015-06-15",
+        "vnetId": "[resourceId('Microsoft.Network/virtualNetworks', parameters('newOrExistingVnetName'))]",
+        "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]",
+        "backupFabric": "Azure",
+        "v2VmType": "Microsoft.Compute/virtualMachines",
+        "v2VmContainer": "iaasvmcontainer;iaasvmcontainerv2;",
+        "v2Vm": "vm;iaasvmcontainerv2;",
+        "vmExtensionName": "MicrosoftMonitoringAgent",
+        "vmResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('customVmName'))]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[variables('nicName')]",
+            "apiVersion": "2016-09-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[variables('subnetRef')]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Compute/images",
+            "apiVersion": "2016-04-30-preview",
+            "name": "[parameters('imageName')]",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "storageProfile": {
+                    "osDisk": {
+                        "osType": "[parameters('osType')]",
+                        "osState": "Generalized",
+                        "blobUri": "[parameters('osDiskVhdUri')]",
+                        "storageAccountType": "Standard_LRS"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[variables('vmName')]",
+            "apiVersion": "2016-04-30-preview",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('vmSize')]"
+                },
+                "osProfile": {
+                    "computerName": "[variables('vmName')]",
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": "true",
+                        "ssh": {
+                            "publicKeys": [
+                                {
+                                    "path": "[concat('/home/', parameters('adminUsername'), '/.ssh/authorized_keys')]",
+                                    "keyData": "[parameters('adminPublicKey')]"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "id": "[resourceId('Microsoft.Compute/images', parameters('imageName'))]"
+                    },
+                    "osDisk": {
+                        "name": "[variables('osDiskName')]",
+                        "createOption": "FromImage",
+                        "managedDisk": {
+                            "storageAccountType": "Standard_LRS"
+                        }
+                    },
+                    "dataDisks": [
+                        {
+                            "diskSizeGB": "[parameters('sizeofdatadiskGB')]",
+                            "lun": 0,
+                            "createOption": "Empty"
+                        }
+                        ]
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]"
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": "true",
+                        "storageUri": "[concat(reference(resourceId(parameters('diagnosticsStorageAccountResourceGroupName'), 'Microsoft.Storage/storageAccounts/', parameters('diagnosticsStorageAccountName')), variables('apiVersion')).primaryEndpoints.blob)]"
+                    }
+                },
+                "availabilitySet": {
+                    "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('availabilitySetName'))]"
+                }
+            },
+            "dependsOn": [
+                "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('existingRecoveryServicesVault'), '/', variables('backupFabric'), '/', variables('v2VmContainer'), concat(parameters('VirtualMachinesResourceGroup'),';',parameters('customVmName')), '/', variables('v2Vm'), concat(parameters('VirtualMachinesResourceGroup'),';',parameters('customVmName')))]",
+            "apiVersion": "2016-06-01",
+            "location": "[resourceGroup().location]",
+            "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems",
+            "dependsOn": [
+                "[concat('Microsoft.Compute/virtualMachines/', variables('VmName'))]"
+            ],
+            "properties": {
+                "protectedItemType": "[variables('v2VmType')]",
+                "policyId": "[resourceId('Microsoft.RecoveryServices/vaults/backupPolicies',parameters('existingRecoveryServicesVault'),parameters('existingBackupPolicy') )]",
+                "sourceResourceId": "[resourceId(subscription().subscriptionId,parameters('VirtualMachinesResourceGroup'),'Microsoft.Compute/virtualMachines',parameters('customVmName'))]"
+            }
+    },
+        {
+            "name": "UpdateEncryptionSettings",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2015-01-01",
+            "dependsOn": [
+                "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-encrypt-running-linux-vm/azuredeploy.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "aadClientID": {
+                        "value": "[parameters('aadClientID')]"
+                    },
+                    "aadClientSecret": {
+                        "value": "[parameters('aadClientSecret')]"
+                    },
+                    "encryptionOperation": {
+                        "value": "[parameters('encryptionOperation')]"
+                    },
+                    "volumeType": {
+                        "value": "[parameters('volumeType')]"
+                    },
+                    "keyEncryptionKeyURL": {
+                        "value": "[parameters('keyEncryptionKeyURL')]"
+                    },
+                    "keyVaultName": {
+                        "value": "[parameters('keyVaultName')]"
+                    },
+                    "keyVaultResourceGroup": {
+                        "value": "[parameters('keyVaultResourceGroup')]"
+                    },
+                    "sequenceVersion": {
+                        "value": "[parameters('sequenceVersion')]"
+                    },
+                    "useKek": {
+                        "value": "[parameters('useKek')]"
+                    },
+                    "vmName": {
+                        "value": "[variables('vmName')]"
+                    }
+                }
+            }
+        }
+    ]
+}

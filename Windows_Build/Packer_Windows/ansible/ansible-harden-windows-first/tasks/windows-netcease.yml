@@ -1,0 +1,15 @@
+---
+
+## http://securityaffairs.co/wordpress/52271/hacking/netcease-tool.html
+## https://gallery.technet.microsoft.com/Net-Cease-Blocking-Net-1e8dcb5b
+
+- name: Copy Netcease - restrict Net Session Enumeration (NetSessionEnum) default permissions
+  win_copy:
+    src: ../files/NetCease.ps1
+    dest: "{{ harden_win_temp_dir }}\\NetCease.ps1"
+
+
+- name: Execute Netcease
+  win_command: "PowerShell.exe -ExecutionPolicy Bypass -File {{ harden_win_temp_dir }}\\NetCease.ps1"
+
+

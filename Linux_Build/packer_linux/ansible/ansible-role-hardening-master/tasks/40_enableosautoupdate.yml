@@ -1,0 +1,19 @@
+---
+- name: Enable autoupdate in Ubuntu
+  become: yes
+  become_method: sudo
+  shell: echo unattended-upgrades unattended-upgrades/enable_auto_updates boolean true | debconf-set-selections
+  when: ansible_distribution == "Ubuntu"
+
+- name: Enabling automatic security updates on redhat or centos
+  become: yes
+  become_method: sudo
+  lineinfile:
+    regexp: "^apply_updates"
+    line: "apply_updates = yes"
+    dest: /etc/yum/yum-cron.conf
+    state: present
+    create: no
+    backrefs: yes
+  when: ansible_distribution == "RedHat" or ansible_distribution == "CentOS"
+...

@@ -1,0 +1,21 @@
+---
+galaxy_info:
+  author: Thomas Sjögren
+  description: Ubuntu and CentOS server hardening, systemd edition
+  license: apache
+  min_ansible_version: 2.1
+  platforms:
+    - name: EL
+      versions:
+        - 7
+    - name: Ubuntu
+      versions:
+        - wily
+        - xenial
+        - yakkety
+  galaxy_tags:
+    - ubuntu
+    - centos
+    - security
+    - hardening
+    - system

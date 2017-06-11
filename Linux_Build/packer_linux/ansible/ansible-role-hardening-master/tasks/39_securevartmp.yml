@@ -1,0 +1,14 @@
+- name: Securing /var/tmp
+  command: mv /var/tmp /var/tmpold
+- name: Creating the symbolic to /tmp
+  file:
+    src: /tmp
+    dest: /var/tmp
+    owner: root
+    group: root
+    state: link
+  tags:
+    - mount
+    - /var/tmp
+    - security
+...

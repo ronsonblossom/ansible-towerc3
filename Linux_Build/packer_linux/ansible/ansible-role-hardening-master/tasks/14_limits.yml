@@ -1,0 +1,31 @@
+---
+# CCE-80169-6
+- name: limits.conf
+  become: yes
+  become_method: sudo
+  template:
+    src: etc/security/limits.d/90-nproc.conf.j2
+    dest: /etc/security/limits.d/90-nproc.conf
+    backup: yes
+    mode: 0644
+    owner: root
+    group: root
+  tags:
+    - limits.conf
+    - security
+
+- name: coredump.conf
+  become: yes
+  become_method: sudo
+  template:
+    src: etc/systemd/coredump.conf.j2
+    dest: /etc/systemd/coredump.conf
+    backup: yes
+    mode: 0644
+    owner: root
+    group: root
+  tags:
+    - coredump.conf
+    - systemd
+    - security
+...

@@ -1,0 +1,28 @@
+- name: Creating /usr/tmpDSK
+  shell: dd if=/dev/zero of=/usr/tmpDSK bs=5120 count=1024000; sleep 300
+- name: Creating a filesystem on /usr/tmpDSK
+  filesystem:
+      fstype: ext4
+      dev: /usr/tmpDSK
+      force: yes
+- name:  Secure /tmp
+  mount:
+    name: /tmp
+    src: /usr/tmpDSK
+    fstype: tmpfs
+    opts: loop,noexec,nosuid,rw
+    state: present
+  tags:
+    - mount
+    - /tmp
+    - security
+- name: Cleaning the old files
+  file: 
+     path: "{{ item }}"
+     state: absent
+  with_items:
+     - /tmp/*
+     - /var/tmp/*
+     - /etc/udev/rules.d/70-persistent-net.rules
+- name: Cleanup the log file
+  shell: find /var/log -type f -exec cp /dev/null {} \;history -c;sync

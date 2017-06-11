@@ -1,0 +1,8 @@
+---
+
+- name: clean the ansible configuration script
+  win_file:
+     path: C:\ConfigureRemotingForAnsible.ps1
+     state: absent
+
+

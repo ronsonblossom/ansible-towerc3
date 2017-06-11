@@ -1,0 +1,197 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "customVmName": {
+      "type": "default",
+      "value": "testserver770",
+      "metadata": {
+        "description": "This is the name of the your VM"
+      }
+    },
+    "diagnosticsStorageAccountName": {
+      "type": "string",
+      "value": "test001diag007",
+      "metadata": {
+        "description": "Provide the existing storage account name"
+      }
+    },
+    "diagnosticsStorageAccountResourceGroupName": {
+      "type": "string",
+      "value": "eyc3wintestrg",
+      "metadata": {
+        "description": "Resource group of the existing storage account"
+      }
+    },
+    "imageName": {
+      "type": "string",
+      "value": "windows-image",
+      "metadata": {
+        "description": "Name of your Image"
+      }
+    },
+    "osDiskVhdUri": {
+      "type": "string",
+      "value": "https://eyc3wintestrgdisks295.blob.core.windows.net/system/Microsoft.Compute/Images/images/packer-osDisk.877b7973-2e4f-49f4-b643-b163b648d978.vhd",
+      "metadata": {
+        "description": "Uri of the your user image"
+      }
+    },
+    "adminUserName": {
+      "type": "string",
+      "value": "osadmin",
+      "metadata": {
+        "description": "User Name for the Virtual Machine"
+      }
+    },
+    "adminPassword": {
+      "type": "string",
+      "value": "Apple@123456789",
+      "metadata": {
+        "description": "Password for the Virtual Machine"
+      }
+    },
+    "adminPublicKey": {
+      "type": "securestring",
+      "value": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAigG4vaUTXlp0V9jChE4uyCWmM6/LTaJ1vg0CS0WkiPx3YoFENXFtR7a13CKgGd20Mjckv52SODf0ulTJbUEQ2XoVjKU4MyJtps1pI3lFowZffz83vqhOr6AApaSExdbQlaKnz4W0l/SHgUr5EI/tDkqpc2XLleG7GfkUJ/Pz69NwcLfw47kS2ryWNooma5i37Rsq8UwF4h7nmr8E9ddhhQet0upls8ELkRpXCQvw5SFY+X67hbLO4/XRHIe4H64W1GphUwbSJ90Tmyil6ZH3nGq16Qxoo5FL77oXrtfy7BdnMuN5GjLbaY2rGg0gT/gZJ/nFOw3XgYGNkdZnrD41iQ==",
+      "metadata": {
+        "description": "SSH Key for the Virtual Machine"
+      }
+    },
+    "osType": {
+      "allowedValues": [
+        "Windows",
+        "Linux"
+      ],
+      "type": "string",
+      "value": "Windows",
+      "metadata": {
+        "description": "This is the OS that your VM will be running"
+      }
+    },
+    "vmSize": {
+      "type": "string",
+      "value": "Standard_DS1",
+      "metadata": {
+        "description": "This is the size of your VM"
+      }
+    },
+    "newOrExistingVnet": {
+      "allowedValues": [
+        "new",
+        "existing"
+      ],
+      "type": "string",
+      "value": "existing",
+      "metadata": {
+        "description": "Select if this template needs a new VNet or will reference an existing VNet"
+      }
+    },
+    "newOrExistingVnetName": {
+      "value": "eyc3wintestrg-vnet",
+      "type": "string",
+      "metadata": {
+        "description": "New or Existing VNet Name"
+      }
+    },
+    "subnetName": {
+      "value": "default",
+      "type": "string",
+      "metadata": {
+        "description": "New or Existing subnet Name"
+      }
+    },
+    "workspaceid": {
+      "value": "7a6429fa-ee1e-4b9e-949f-6227c26b62b0",
+      "type": "string",
+      "metadata": {
+        "description": "Existing workspaceID"
+      }
+    },
+    "workspacekey": {
+      "value": "kZBQcxucnLPURIFJDf2fuWIs38v1L7hwTK+/a+oppuJDxY1irehfY7kJkG4csS5I+FcfWtCtuHPX1M5urI6mFA==",
+      "type": "string",
+      "metadata": {
+        "description": "workspacekey"
+      }
+    },
+    "existingRecoveryServicesVault": {
+      "value": "eyc3wintestbv",
+      "type": "string",
+      "metadata": {
+        "description": "Recovery Service Vault Name"
+      }
+    },
+    "existingBackupPolicy": {
+      "value": "DefaultPolicy",
+      "type": "string",
+      "metadata": {
+        "description": "Backup Policy Name"
+      }
+    },
+    "VirtualMachinesResourceGroup": {
+      "type": "string",
+      "value": "eyc3wintestrg",
+      "metadata": {
+        "description": "This is the name of the ResourceGroup Name"
+      }
+    },
+    "availabilitySetName": {
+      "type": "string",
+      "value": "testserverwinmgAvailabilitySet01",
+      "metadata": {
+        "description": "This is the Availability Set"
+      }
+    },
+    "aadClientID": {
+      "type": "string",
+      "value": "f868e630-6b43-4ed7-87d4-cc03be9e8846",
+      "metadata": {
+        "description": "This is the ClientID of the AAD application used to intergate with KeyVault"
+      }
+    },
+    "aadClientSecret": {
+      "type": "string",
+      "value": "eyc3wintestSecret",
+      "metadata": {
+        "description": "This is the Client Secret of the above mentioned AAD Client"
+      }
+    },
+    "keyVaultName": {
+      "type": "string",
+      "value": "eyc3wintestkv",
+      "metadata": {
+        "description": "This is the name of the keyVault"
+      }
+    },
+    "keyVaultResourceGroup": {
+      "type": "string",
+      "value": "eyc3wintestrg",
+      "metadata": {
+        "description": "This is the name of the ResourceGroup in which KeyVault exist"
+      }
+    },
+    "useExistingKek": {
+      "type": "string",
+      "value": "kek",
+      "metadata": {
+        "description": "This is the Key Encryption Key"
+      }
+    },
+    "keyEncryptionKeyURL": {
+      "type": "string",
+      "value": "https://eyc3wintestkv.vault.azure.net/keys/eyc3wintestKEK/9d1cbaaeb1db46c492cf3c84d99f174b",
+      "metadata": {
+        "description": "This is the URL of KEK"
+      }
+    },
+    "sizeofdatadiskGB": {
+      "type": "string",
+      "value": "10",
+      "metadata": {
+        "description": "size of data disk in GB"
+      }
+    }
+  }
+}
+

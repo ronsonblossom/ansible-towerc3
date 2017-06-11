@@ -1,0 +1,4 @@
+- name: enable multi-user mode
+  shell: systemctl enable multi-user.target
+- name: make  multi-user mode default
+  shell: systemctl set-default multi-user.target

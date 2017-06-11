@@ -1,0 +1,8 @@
+export ARM_SUBSCRIPTION_ID="890e6987-d453-43b2-aa5e-139603074899"
+export ARM_CLIENT_ID="cb6d315c-f5c9-4e9e-8a8a-9495a65520c5"
+export ARM_CLIENT_SECRET="8RA7apha-wr5p-7x3y-82fu-NEqCHEsEFY8"
+export ARM_TENANT_ID="d22a5dd1-ae22-4d29-8b30-bdb2c0f25ea4"
+export LOCATION="Australia East"
+export VM_SIZE="Standard_A0"
+export RGNAME="eyc3wintestrg"
+export STORAGENAME="eyc3wintestrgdisks295"

@@ -1,0 +1,8 @@
+- name: copying the oms cred file
+  template: 
+      src: etc/omscreds.j2
+      dest: /etc/omscreds
+      owner: root
+      group: root
+      mode: 0600
+      

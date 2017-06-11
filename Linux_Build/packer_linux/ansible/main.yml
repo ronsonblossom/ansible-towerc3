@@ -1,0 +1,6 @@
+---
+- hosts: 127.0.0.1
+  become: yes
+  gather_facts: yes
+  roles: 
+    - { role: ansible-role-hardening-master }

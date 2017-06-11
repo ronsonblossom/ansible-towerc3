@@ -1,0 +1,24 @@
+---
+- name: Disable irqbalance
+  become: yes
+  become_method: sudo
+  lineinfile:
+    dest: /etc/default/irqbalance
+    regexp: '^ENABLED='
+    state: present
+    line: 'ENABLED="0"'
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - disable_irqbalance
+    - security
+- name: stopping the irqbalance
+  become: yes
+  become_method: sudo
+  service:
+    name: irqbalance 
+    state: stopped
+    enabled: no
+  tags:
+    - stop_irqbalance
+    - security
+...

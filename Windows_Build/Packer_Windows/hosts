@@ -1,0 +1,2 @@
+[all]
+10.1.5.46 ansible_port=5986 ansible_connection=winrm ansible_winrm_server_cert_validation=ignore ansible_user=osadmin ansible_password=7u4AjagAfe8rec

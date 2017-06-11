@@ -1,0 +1,138 @@
+## http://windowsitpro.com/networking/q-how-can-i-disable-netbios-over-tcpip-windows-server-core-installations
+## https://technet.microsoft.com/en-us/library/cc775874%28v=ws.10%29.aspx
+- name: Disable Windows Link-Local Multicast Name Resolution (LLMNR)
+  win_regedit:
+    key: HKLM:\Software\Policies\Microsoft\Windows NT\DNSClient
+    value: EnableMulticast
+    data: 0
+    datatype: dword
+### FIXME!
+- name: Disable Windows Netbios Name Service (NBT-NS)
+##  win_regedit:
+##  key: HKLM:\SYSTEM\CurrentControlSet\services\NetBT\Parameters\Interfaces\xxxGUIDxxx
+##    value: NetbiosOptions
+##    data: 2
+### This one is working fine
+  win_command: "wmic /interactive:off nicconfig where TcpipNetbiosOptions={{ item }} call SetTcpipNetbios 2"
+  with_items:
+    - 0
+    - 1
+## FIXME! doesn't seem to work
+#  win_command: 'powershell -Command "set-ItemProperty HKLM:SYSTEMCurrentControlSetservicesNetBTParametersInterfacestcpip* -Name NetbiosOptions -Value 2"'
+
+## http://news.softpedia.com/news/how-to-prevent-zip-files-from-executing-malicious-javascript-behind-your-back-503226.shtml
+## https://labsblog.f-secure.com/2016/04/19/how-to-disable-windows-script-host/
+###- name: disable Windows Script Host (1)
+###  win_regedit:
+###    key: HKLM:\SOFTWARE\Microsoft\Windows Script Host\Settings
+###    value: Enabled
+###    data: 0
+###    datatype: dword
+###- name: disable Windows Script Host (2)
+###  win_regedit:
+###   key: HKLM:\SOFTWARE\Microsoft\Windows Script Host\Settings
+###   value: IgnoreUserSettings
+###    data: 1
+###   datatype: dword
+## not sure about this one?
+#- name: Enable SAFER -  Software Restrictions Policies block scripts
+#  win_regedit:
+#    key: HKLM:\SOFTWARE\Microsoft\Windows Script Host\Settings
+#    value: UseWinSAFER
+#    data: 0
+
+## https://bluesoul.me/2016/05/12/use-gpo-to-change-the-default-behavior-of-potentially-malicious-file-extensions/
+## HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\
+## \HKEY_CLASSES_ROOT\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts
+## Partially covered if Windows Script Host is disabled
+## FIXME! NOK
+###- name: disable suspicious executabled file extensions (HKCU)
+###  win_regedit:
+#    key: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.hta
+###    key: "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.{{ item }}"
+#    key: "HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.{{ item }}"    ## NOK
+#    key: "HKLM:\\Software\\Exts\\.{{ item }}"    ## NOK
+###    value: "(Default)"
+###    datatype: string
+###    data: "%windir%\\system32\\notepad.exe"
+###  with_items: "{{ harden_win_suspicious_ext }}"
+
+## Note: HKCR only applies if HKCU doesn't exist. better enforcing with GPO
+- name: disable javascript execution by Windows Script Host (HKCR)
+  win_regedit:
+#    key: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.hta
+    key: "{{ item }}"
+    data: "%windir%\\system32\\notepad.exe %1"
+  with_items:
+    - "HKCR:\\htafile\\shell\\open\\command"
+    - "HKCR:\\VBSFile\\shell\\open\\command"
+    - "HKCR:\\JSFile\\shell\\open\\command"
+    - "HKCR:\\scriptletfile\\shell\\open\\command"  ## default
+
+## https://blogs.technet.microsoft.com/fdcc/2011/01/24/alwaysinstallelevated-is-equivalent-to-granting-administrative-rights/
+## https://msdn.microsoft.com/en-us/library/windows/desktop/aa367561(v=vs.85).aspx
+- name: Ensure Msiexec only executes with current user privileges
+  win_regedit:
+    key: HKLM:\Software\Policies\Microsoft\Windows\Installer
+    value: AlwaysInstallElevated
+    data: 0
+    datatype: dword
+
+- include: wpad-disable.yml
+  when: harden_windows_disable_wpad is defined and harden_windows_disable_wpad
+
+- name: Disable CMD
+  win_regedit:
+    key: HKCU:\Software\Policies\Microsoft\Windows\System
+    value: DisableCMD
+    datatype: dword
+    data: 1
+  when: harden_windows_disable_cmd
+
+## https://onedrive.live.com/view.aspx?resid=A352EBC5934F0254!3316&ithint=file%2cpptx&app=PowerPoint
+## https://support.microsoft.com/en-us/help/2871997/microsoft-security-advisory-update-to-improve-credentials-protection-and-management-may-13,-2014
+- name: Win7/KB2871997 | trigger the clearing of any credentials of logged off users after 30 seconds
+  win_regedit:
+    key: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
+    value: TokenLeakDetectDelaySecs
+    datatype: dword
+    data: 30
+
+- include: windows-mimikatz.yml
+
+## https://technet.microsoft.com/en-us/library/cc960646.aspx
+- name: Strong Windows NTLMv2 Authentication Enabled; Weak LM/NTLM Disabled
+  win_regedit:
+    key: HKLM:\System\CurrentControlSet\Control\Lsa
+    value: LmCompatibilityLevel
+    datatype: dword
+    data: 5
+
+- name: Network security - Minimum session security for NTLM SSP based clients
+  win_regedit:
+    key: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0
+    value: NtlmMinClientSec
+    datatype: dword
+    data: 537395248
+
+- name: Network security - Minimum session security for NTLM SSP based servers
+  win_regedit:
+    key: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0
+    value: NtlmMinServerSec
+    datatype: dword
+    data: 537395248
+
+- name: Windows Remote Desktop Configured to Always Prompt for Password
+  win_regedit:
+    key: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    value: fPromptForPassword
+    datatype: dword
+    data: 1
+
+- name: Strong Encryption for Windows Remote Desktop Required
+  win_regedit:
+    key: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+    value: MinEncryptionLevel
+    datatype: dword
+    data: 3
+

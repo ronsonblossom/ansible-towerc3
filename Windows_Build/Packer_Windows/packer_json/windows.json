@@ -1,0 +1,86 @@
+{
+  "variables": {
+    "tenant_id": "{{env `ARM_TENANT_ID`}}",
+    "client_id": "{{env `ARM_CLIENT_ID`}}",
+    "client_secret": "{{env `ARM_CLIENT_SECRET`}}",
+    "subscription_id": "{{env `ARM_SUBSCRIPTION_ID`}}",
+    "object_id": "{{ env `ARM_OBJECT_ID`}}",
+    "resource_group": "{{env `RGNAME`}}",
+    "storage_account": "{{env `STORAGENAME`}}",
+    "image_publisher": "{{env `IMAGE_PUBLISHER`}}",
+    "image_offer":  "{{env `IMAGE_OFFER`}}",
+    "image_sku": "{{env `IMAGE_SKU`}}",
+    "image_version": "{{env `IMAGE_VERSION`}}",
+    "location": "{{env `LOCATION`}}",
+    "vm_size": "{{ env `VM_SIZE`}}",
+    "winrm_username": "{{ env `WINRM_USERNAME`}}",
+    "communicator": "{{ env `COMMUNICATOR`}}",
+    "winrm_insecure": "{{ env `WINRM_INSECURE`}}",
+    "winrm_use_ssl": "{{ env `WINRM_USE_SSL`}}",
+    "winrm_timeout": "{{ env `WINRM_TIMEOUT`}}",
+    "virtual_network_name": "{{ env `VIRTUAL_NETWORK_NAME`}}",
+    "virtual_network_resource_group_name": "{{ env `VIRTUAL_NETWORK_RESOURCE_GROUP_NAME`}}",
+    "virtual_network_subnet_name": "{{ env `VIRTUAL_NETWORK_SUBNET_NAME`}}"
+  },
+  "builders": [{
+    "type": "azure-arm",
+    "client_id": "{{user `client_id`}}",
+    "client_secret": "{{user `client_secret`}}",
+    "resource_group_name": "{{user `resource_group`}}",
+    "storage_account": "{{user `storage_account`}}",
+    "subscription_id": "{{user `subscription_id`}}",
+    "tenant_id": "{{user `tenant_id`}}",
+    "capture_container_name": "images",
+    "capture_name_prefix": "packer",
+    "os_type": "Windows",
+    "image_publisher": "{{user `image_publisher`}}",
+    "image_offer":  "{{user `image_offer`}}",
+    "image_sku": "{{user `image_sku`}}",
+    "image_version": "{{user `image_version`}}",
+    "location": "{{user `location`}}",
+    "vm_size": "{{user `vm_size`}}",
+    "communicator": "{{user `communicator`}}",
+    "winrm_insecure": "{{user `winrm_insecure`}}",
+    "winrm_use_ssl": "{{user `winrm_use_ssl`}}",
+    "winrm_timeout": "{{user `winrm_timeout`}}",
+    "winrm_username": "{{user `winrm_username`}}",
+    "object_id": "{{user `object_id`}}",
+    "virtual_network_name": "{{user `virtual_network_name`}}",
+    "virtual_network_resource_group_name": "{{user `virtual_network_resource_group_name`}}",
+    "virtual_network_subnet_name": "{{user `virtual_network_subnet_name`}}"
+  }],
+  "provisioners": [
+{
+      "type": "powershell",
+      "inline": [
+        "cd C:\\",
+        "Invoke-WebRequest -OutFile C:\\ConfigureRemotingForAnsible.ps1 https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1",
+        "./ConfigureRemotingForAnsible.ps1"
+      ]
+},
+{
+  "type": "windows-shell",
+  "inline": ["net user osadmin 7u4AjagAfe8rec /add", "net localgroup administrators osadmin /add"]
+},
+{
+  "type": "shell-local",
+  "execute_command": "./ip_script.sh",
+  "command": "sleep 10"
+},
+{
+  "type": "shell-local",
+  "command": "ansible-playbook -i hosts ansible/ansible-harden-windows.yml"
+},
+{
+  "type": "windows-shell",
+  "inline": ["net user osadmin /delete"]
+},
+{
+    "type": "powershell",
+    "inline": [
+      "if( Test-Path $Env:SystemRoot\\windows\\system32\\Sysprep\\unattend.xml ){ rm $Env:SystemRoot\\windows\\system32\\Sysprep\\unattend.xml -Force}",
+      "& $Env:SystemRoot\\System32\\Sysprep\\Sysprep.exe /oobe /generalize /shutdown /quiet"
+    ]
+}
+]
+}

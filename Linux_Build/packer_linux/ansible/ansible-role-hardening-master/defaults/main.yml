@@ -1,0 +1,26 @@
+---
+auditd_arch: b64
+redhat_rpm_key: [567E347AD0044ADE55BA8A5F199E2F91FD431D51, 47DB287789B21722B6D95DDE5326810137017186]
+ntp: 0.ubuntu.pool.ntp.org 1.ubuntu.pool.ntp.org
+fallback_ntp: 2.ubuntu.pool.ntp.org 3.ubuntu.pool.ntp.org
+ssh_allow_groups: sudo
+sshd_admin_net: [192.168.0.0/24, 192.168.1.0/24]
+dns: 127.0.0.1
+fallback_dns: 8.8.8.8 8.8.4.4
+dnssec: allow-downgrade
+suid_sgid_blacklist: [/bin/ntfs-3g, /usr/bin/at, /bin/fusermount, /bin/mount, /bin/ping, /bin/ping6, /bin/su, /bin/umount, /sbin/mount.nfs, /usr/bin/bsd-write, /usr/bin/chage, /usr/bin/chfn, /usr/bin/chsh, /usr/bin/mlocate, /usr/bin/mtr, /usr/bin/newgrp, /usr/bin/pkexec, /usr/bin/traceroute6.iputils, /usr/bin/wall, /usr/bin/write, /usr/sbin/pppd]
+random_ack_limit: "{{ 1000000 | random(start=1000) }}"
+packages_ubuntu: [acct, aide-common, aide, apparmor-profiles, apparmor-utils, auditd, debsums, haveged, libpam-cracklib, libpam-tmpdir, openssh-server, rsyslog, aptitude, unattended-upgrades]
+packages_centos_redhat: [aide, audit, haveged, openssh-server, rsyslog, yum-cron]
+packages_blacklist: [avahi-*, rsh*, talk*, telnet*, tftp*, yp-tools, ypbind, xinetd, usbutils, postfix, tcpdump]
+net_modules_blacklist: [dccp, sctp, rds, tipc]
+fs_modules_blacklist: [cramfs, freevxfs, hfs, hfsplus, jffs2, squashfs, udf, vfat]
+misc_modules_blacklist: [bluetooth, firewire-core, n_hdlc, net-pf-31, soundcore, thunderbolt, usb-midi, usb-storage]
+oms_workspace_id: 7a6429fa-ee1e-4b9e-949f-6227c26b62b0
+oms_workspace_key: kZBQcxucnLPURIFJDf2fuWIs38v1L7hwTK+/a+oppuJDxY1irehfY7kJkG4csS5I+FcfWtCtuHPX1M5urI6mFA==
+limit_nofile_soft: 50000
+limit_nofile_hard: 50000
+limit_nproc_soft: 10000
+limit_nproc_hard: 10000
+grub_cmdline: audit=1
+...

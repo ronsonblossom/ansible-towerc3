@@ -1,0 +1,8 @@
+- name: Disable IPV6 
+  win_regedit:
+    key: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters
+    value: DisabledComponents
+    data: 0xff
+    datatype: dword
+    state: present
+

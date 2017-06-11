@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  author: juju4
+  description: Windows Hardening role
+  license: BSD
+## win_regedit HKCR
+  min_ansible_version: 2.1
+  platforms:
+  - name: Windows
+    versions:
+     - 7
+     - 10
+  galaxy_tags:
+    - system
+    - security
+dependencies: []
+

@@ -1,0 +1,14 @@
+---
+- name:  Secure Shared Memory - mount tmpfs
+  mount:
+    name: /run/shm
+    src: none
+    fstype: tmpfs
+    opts: rw,noexec,nosuid,nodev
+    state: present
+  tags:
+    - mount
+    - tmpfs
+    - security
+  when: ansible_distribution == "Ubuntu"
+...
