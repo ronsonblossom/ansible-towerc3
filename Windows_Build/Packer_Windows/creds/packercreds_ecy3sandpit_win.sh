@@ -1,4 +1,5 @@
 #!/bin/bash
+RANDOM=$(shuf -i1-100000 -n1)
 export ARM_SUBSCRIPTION_ID="890e6987-d453-43b2-aa5e-139603074899"
 export ARM_CLIENT_ID="cb6d315c-f5c9-4e9e-8a8a-9495a65520c5"
 export ARM_CLIENT_SECRET="8RA7apha-wr5p-7x3y-82fu-NEqCHEsEFY8"
@@ -16,3 +17,4 @@ export COMMUNICATOR="winrm"
 export WINRM_INSECURE="true"
 export WINRM_USE_SSL="true"
 export WINRM_TIMEOUT="3m"
+export MANAGEDDISKIMAGE_NAME="Windows_PACKER_$RANDOM"

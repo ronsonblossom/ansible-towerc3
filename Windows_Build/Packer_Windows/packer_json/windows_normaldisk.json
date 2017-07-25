@@ -69,7 +69,7 @@
 },
 {
   "type": "shell-local",
-  "command": "ansible-playbook -i hosts ansible/ansible-harden-windows.yml"
+  "command": "ansible-playbook -i hosts/hosts_file ansible/ansible-harden-windows.yml"
 },
 {
   "type": "windows-shell",

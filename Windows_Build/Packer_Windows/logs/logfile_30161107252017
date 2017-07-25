@@ -1,0 +1,34 @@
+OS Version
+===============================
+IMAGE_PUBLISHER : MicrosoftWindowsServer
+IMAGE_OFFER : WindowsServer
+IMAGE_SKU : 2012-R2-Datacenter
+IMAGE_VERSION : latest
+================================
+                     
+                     
+[1;32mazure-arm output will be in this color.[0m
+
+[1;32m==> azure-arm: Running builder ...[0m
+[0;32m    azure-arm: Creating Azure Resource Manager (ARM) client ...[0m
+[1;32m==> azure-arm: Creating resource group ...[0m
+[1;32m==> azure-arm:  -> ResourceGroupName : 'packer-Resource-Group-wcp30db8q9'[0m
+[1;32m==> azure-arm:  -> Location          : 'Australia East'[0m
+[1;32m==> azure-arm:  -> Tags              :[0m
+[1;32m==> azure-arm: Validating deployment template ...[0m
+[1;32m==> azure-arm:  -> ResourceGroupName : 'packer-Resource-Group-wcp30db8q9'[0m
+[1;32m==> azure-arm:  -> DeploymentName    : 'pkrdpwcp30db8q9'[0m
+[1;32m==> azure-arm: Deploying deployment template ...[0m
+[1;32m==> azure-arm:  -> ResourceGroupName : 'packer-Resource-Group-wcp30db8q9'[0m
+[1;32m==> azure-arm:  -> DeploymentName    : 'pkrdpwcp30db8q9'[0m
+[1;32m==> azure-arm: Getting the certificate's URL ...[0m
+[1;32m==> azure-arm:  -> Key Vault Name        : 'pkrkvwcp30db8q9'[0m
+[1;32m==> azure-arm:  -> Key Vault Secret Name : 'packerKeyVaultSecret'[0m
+[1;32m==> azure-arm:  -> Certificate URL       : 'https://pkrkvwcp30db8q9.vault.azure.net/secrets/packerKeyVaultSecret/aac250be577e4a4c92cc3bef792637a8'[0m
+[1;32m==> azure-arm: Setting the certificate's URL ...[0m
+[1;32m==> azure-arm: Validating deployment template ...[0m
+[1;32m==> azure-arm:  -> ResourceGroupName : 'packer-Resource-Group-wcp30db8q9'[0m
+[1;32m==> azure-arm:  -> DeploymentName    : 'pkrdpwcp30db8q9'[0m
+[1;32m==> azure-arm: Deploying deployment template ...[0m
+[1;32m==> azure-arm:  -> ResourceGroupName : 'packer-Resource-Group-wcp30db8q9'[0m
+[1;32m==> azure-arm:  -> DeploymentName    : 'pkrdpwcp30db8q9'[0m

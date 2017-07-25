@@ -1,0 +1,607 @@
+OS Version
+===============================
+IMAGE_PUBLISHER : MicrosoftWindowsServer
+IMAGE_OFFER : WindowsServer
+IMAGE_SKU : 2012-R2-Datacenter
+IMAGE_VERSION : latest
+================================
+                     
+                     
+[1;32mazure-arm output will be in this color.[0m
+
+[1;32m==> azure-arm: Running builder ...[0m
+[0;32m    azure-arm: Creating Azure Resource Manager (ARM) client ...[0m
+[1;32m==> azure-arm: Creating resource group ...[0m
+[1;32m==> azure-arm:  -> ResourceGroupName : 'packer-Resource-Group-kn1dwbm3fq'[0m
+[1;32m==> azure-arm:  -> Location          : 'Australia East'[0m
+[1;32m==> azure-arm:  -> Tags              :[0m
+[1;32m==> azure-arm: Validating deployment template ...[0m
+[1;32m==> azure-arm:  -> ResourceGroupName : 'packer-Resource-Group-kn1dwbm3fq'[0m
+[1;32m==> azure-arm:  -> DeploymentName    : 'pkrdpkn1dwbm3fq'[0m
+[1;32m==> azure-arm: Deploying deployment template ...[0m
+[1;32m==> azure-arm:  -> ResourceGroupName : 'packer-Resource-Group-kn1dwbm3fq'[0m
+[1;32m==> azure-arm:  -> DeploymentName    : 'pkrdpkn1dwbm3fq'[0m
+[1;32m==> azure-arm: Getting the certificate's URL ...[0m
+[1;32m==> azure-arm:  -> Key Vault Name        : 'pkrkvkn1dwbm3fq'[0m
+[1;32m==> azure-arm:  -> Key Vault Secret Name : 'packerKeyVaultSecret'[0m
+[1;32m==> azure-arm:  -> Certificate URL       : 'https://pkrkvkn1dwbm3fq.vault.azure.net/secrets/packerKeyVaultSecret/b7b4fddc61084d66bff069902387884b'[0m
+[1;32m==> azure-arm: Setting the certificate's URL ...[0m
+[1;32m==> azure-arm: Validating deployment template ...[0m
+[1;32m==> azure-arm:  -> ResourceGroupName : 'packer-Resource-Group-kn1dwbm3fq'[0m
+[1;32m==> azure-arm:  -> DeploymentName    : 'pkrdpkn1dwbm3fq'[0m
+[1;32m==> azure-arm: Deploying deployment template ...[0m
+[1;32m==> azure-arm:  -> ResourceGroupName : 'packer-Resource-Group-kn1dwbm3fq'[0m
+[1;32m==> azure-arm:  -> DeploymentName    : 'pkrdpkn1dwbm3fq'[0m
+[1;32m==> azure-arm: Getting the VM's IP address ...[0m
+[1;32m==> azure-arm:  -> ResourceGroupName   : 'packer-Resource-Group-kn1dwbm3fq'[0m
+[1;32m==> azure-arm:  -> PublicIPAddressName : 'packerPublicIP'[0m
+[1;32m==> azure-arm:  -> NicName             : 'packerNic'[0m
+[1;32m==> azure-arm:  -> Network Connection  : 'PrivateEndpoint'[0m
+[1;32m==> azure-arm:  -> IP Address          : '10.1.5.100'[0m
+[1;32m==> azure-arm: Waiting for WinRM to become available...[0m
+[1;32m==> azure-arm: Connected to WinRM![0m
+[1;32m==> azure-arm: Provisioning with Powershell...[0m
+[1;32m==> azure-arm: Provisioning with shell script: /tmp/packer-powershell-provisioner370156581[0m
+[0;32m    azure-arm: Ok.[0m
+[0;32m    azure-arm:[0m
+[1;32m==> azure-arm: Provisioning with windows-shell...[0m
+[1;32m==> azure-arm: Provisioning with shell script: /tmp/packer-windows-shell-provisioner487019273[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: C:\Users\packer>net user osadmin 7u4AjagAfe8rec /add[0m
+[0;32m    azure-arm: The command completed successfully.[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: C:\Users\packer>net localgroup administrators osadmin /add[0m
+[0;32m    azure-arm: The command completed successfully.[0m
+[0;32m    azure-arm:[0m
+[1;32m==> azure-arm: Executing local command: sleep 10[0m
+[1;32m==> azure-arm: Executing local command: ansible-playbook -i hosts/hosts_file ansible/ansible-harden-windows.yml[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: PLAY [all] *********************************************************************[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [Gathering Facts] *********************************************************[0m
+[0;32m    azure-arm: ok: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Create temp dir] **************************[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Install all security/critical updates] ****[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Install packages] *************************[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item=emet)[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=powershell) => {"changed": true, "choco_error_cmd": "C:\\ProgramData\\chocolatey\\bin\\choco.exe install -dv -y powershell -timeout 2700", "choco_error_log": null, "failed": true, "item": "powershell", "msg": "Error installing powershell", "rc": 5}[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item=procexp)[0m
+[0;32m    azure-arm: ...ignoring[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Disable unnecessary services] *************[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=AdobeLM Service) => {"changed": false, "exists": false, "failed": true, "item": "AdobeLM Service", "msg": "Service 'AdobeLM Service' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Bluetooth Support Service) => {"changed": false, "exists": false, "failed": true, "item": "Bluetooth Support Service", "msg": "Service 'Bluetooth Support Service' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Xbox Live Game Save) => {"changed": false, "exists": false, "failed": true, "item": "Xbox Live Game Save", "msg": "Service 'Xbox Live Game Save' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Xbox Live Auth Manager) => {"changed": false, "exists": false, "failed": true, "item": "Xbox Live Auth Manager", "msg": "Service 'Xbox Live Auth Manager' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Windows Mobile Hotspot Service) => {"changed": false, "exists": false, "failed": true, "item": "Windows Mobile Hotspot Service", "msg": "Service 'Windows Mobile Hotspot Service' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Enterprise App Management Service) => {"changed": false, "exists": false, "failed": true, "item": "Enterprise App Management Service", "msg": "Service 'Enterprise App Management Service' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Fast User Switching Compatibility) => {"changed": false, "exists": false, "failed": true, "item": "Fast User Switching Compatibility", "msg": "Service 'Fast User Switching Compatibility' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Error Reporting Service) => {"changed": false, "exists": false, "failed": true, "item": "Error Reporting Service", "msg": "Service 'Error Reporting Service' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=FTP Publishing) => {"changed": false, "exists": false, "failed": true, "item": "FTP Publishing", "msg": "Service 'FTP Publishing' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=InstallDriver Table Manager) => {"changed": false, "exists": false, "failed": true, "item": "InstallDriver Table Manager", "msg": "Service 'InstallDriver Table Manager' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Windows Messenger) => {"changed": false, "exists": false, "failed": true, "item": "Windows Messenger", "msg": "Service 'Windows Messenger' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=NetMeeting Remote Desktop Sharing) => {"changed": false, "exists": false, "failed": true, "item": "NetMeeting Remote Desktop Sharing", "msg": "Service 'NetMeeting Remote Desktop Sharing' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=NT LM Security Support Provider) => {"changed": false, "exists": false, "failed": true, "item": "NT LM Security Support Provider", "msg": "Service 'NT LM Security Support Provider' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Remote Desktop Help Session Manager) => {"changed": false, "exists": false, "failed": true, "item": "Remote Desktop Help Session Manager", "msg": "Service 'Remote Desktop Help Session Manager' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item=Smart Card)[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Telnet) => {"changed": false, "exists": false, "failed": true, "item": "Telnet", "msg": "Service 'Telnet' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Uninterrupted Power Supply) => {"changed": false, "exists": false, "failed": true, "item": "Uninterrupted Power Supply", "msg": "Service 'Uninterrupted Power Supply' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item=Volume Shadow Copy)[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Windows Firewall/Internet Connection Sharing (ICS)) => {"changed": false, "exists": false, "failed": true, "item": "Windows Firewall/Internet Connection Sharing (ICS)", "msg": "Service 'Windows Firewall/Internet Connection Sharing (ICS)' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Fax) => {"changed": false, "exists": false, "failed": true, "item": "Fax", "msg": "Service 'Fax' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Offline Files) => {"changed": false, "exists": false, "failed": true, "item": "Offline Files", "msg": "Service 'Offline Files' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Geolocation Service) => {"changed": false, "exists": false, "failed": true, "item": "Geolocation Service", "msg": "Service 'Geolocation Service' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Sensor Service) => {"changed": false, "exists": false, "failed": true, "item": "Sensor Service", "msg": "Service 'Sensor Service' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=RetailDemo) => {"changed": false, "exists": false, "failed": true, "item": "RetailDemo", "msg": "Service 'RetailDemo' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item=IKEEXT)[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item=MSiSCSI)[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=diagnosticshub.standardcollector.service) => {"changed": false, "exists": false, "failed": true, "item": "diagnosticshub.standardcollector.service", "msg": "Service 'diagnosticshub.standardcollector.service' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item=DiagTrack)[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=dmwappushservice) => {"changed": false, "exists": false, "failed": true, "item": "dmwappushservice", "msg": "Service 'dmwappushservice' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=HomeGroupListener) => {"changed": false, "exists": false, "failed": true, "item": "HomeGroupListener", "msg": "Service 'HomeGroupListener' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=HomeGroupProvider) => {"changed": false, "exists": false, "failed": true, "item": "HomeGroupProvider", "msg": "Service 'HomeGroupProvider' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=lfsvc) => {"changed": false, "exists": false, "failed": true, "item": "lfsvc", "msg": "Service 'lfsvc' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=MapsBroker) => {"changed": false, "exists": false, "failed": true, "item": "MapsBroker", "msg": "Service 'MapsBroker' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item=NetTcpPortSharing)[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item=SharedAccess)[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item=TrkWks)[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=WbioSrvc) => {"changed": false, "exists": false, "failed": true, "item": "WbioSrvc", "msg": "Service 'WbioSrvc' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=WMPNetworkSvc) => {"changed": false, "exists": false, "failed": true, "item": "WMPNetworkSvc", "msg": "Service 'WMPNetworkSvc' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=XblAuthManager) => {"changed": false, "exists": false, "failed": true, "item": "XblAuthManager", "msg": "Service 'XblAuthManager' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=XblGameSave) => {"changed": false, "exists": false, "failed": true, "item": "XblGameSave", "msg": "Service 'XblGameSave' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=XboxNetApiSvc) => {"changed": false, "exists": false, "failed": true, "item": "XboxNetApiSvc", "msg": "Service 'XboxNetApiSvc' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Help and Support) => {"changed": false, "exists": false, "failed": true, "item": "Help and Support", "msg": "Service 'Help and Support' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Indexing Service) => {"changed": false, "exists": false, "failed": true, "item": "Indexing Service", "msg": "Service 'Indexing Service' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Install Driver Table Manager) => {"changed": false, "exists": false, "failed": true, "item": "Install Driver Table Manager", "msg": "Service 'Install Driver Table Manager' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=NetMeeting Remote Desktop Sharing) => {"changed": false, "exists": false, "failed": true, "item": "NetMeeting Remote Desktop Sharing", "msg": "Service 'NetMeeting Remote Desktop Sharing' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=NVIDIA Display Driver Service) => {"changed": false, "exists": false, "failed": true, "item": "NVIDIA Display Driver Service", "msg": "Service 'NVIDIA Display Driver Service' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Office Source Engine) => {"changed": false, "exists": false, "failed": true, "item": "Office Source Engine", "msg": "Service 'Office Source Engine' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item=Print Spooler)[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Protected Storage) => {"changed": false, "exists": false, "failed": true, "item": "Protected Storage", "msg": "Service 'Protected Storage' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Removable Storage) => {"changed": false, "exists": false, "failed": true, "item": "Removable Storage", "msg": "Service 'Removable Storage' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Security Center) => {"changed": false, "exists": false, "failed": true, "item": "Security Center", "msg": "Service 'Security Center' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Telnet) => {"changed": false, "exists": false, "failed": true, "item": "Telnet", "msg": "Service 'Telnet' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Uninterrupted Power Supply) => {"changed": false, "exists": false, "failed": true, "item": "Uninterrupted Power Supply", "msg": "Service 'Uninterrupted Power Supply' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item=Volume Shadow Copy)[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Windows Media Connect) => {"changed": false, "exists": false, "failed": true, "item": "Windows Media Connect", "msg": "Service 'Windows Media Connect' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Windows Media Connect Helper) => {"changed": false, "exists": false, "failed": true, "item": "Windows Media Connect Helper", "msg": "Service 'Windows Media Connect Helper' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Wireless Zero Configuration) => {"changed": false, "exists": false, "failed": true, "item": "Wireless Zero Configuration", "msg": "Service 'Wireless Zero Configuration' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=WMI Performance Adapters) => {"changed": false, "exists": false, "failed": true, "item": "WMI Performance Adapters", "msg": "Service 'WMI Performance Adapters' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: ...ignoring[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Set some services in manual start] ********[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item=Application Management)[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item=Cryptographic Services)[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Distributed Transaction Service) => {"changed": false, "exists": false, "failed": true, "item": "Distributed Transaction Service", "msg": "Service 'Distributed Transaction Service' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Help and Support) => {"changed": false, "exists": false, "failed": true, "item": "Help and Support", "msg": "Service 'Help and Support' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=HTTP SSL) => {"changed": false, "exists": false, "failed": true, "item": "HTTP SSL", "msg": "Service 'HTTP SSL' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=IMAPI CD-Burning COM Service) => {"changed": false, "exists": false, "failed": true, "item": "IMAPI CD-Burning COM Service", "msg": "Service 'IMAPI CD-Burning COM Service' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=IPSEC Services) => {"changed": false, "exists": false, "failed": true, "item": "IPSEC Services", "msg": "Service 'IPSEC Services' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=MS Software Shadow Copy Provider) => {"changed": false, "exists": false, "failed": true, "item": "MS Software Shadow Copy Provider", "msg": "Service 'MS Software Shadow Copy Provider' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Portable Media Serial Number Service) => {"changed": false, "exists": false, "failed": true, "item": "Portable Media Serial Number Service", "msg": "Service 'Portable Media Serial Number Service' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Remote Procedure Call Locator) => {"changed": false, "exists": false, "failed": true, "item": "Remote Procedure Call Locator", "msg": "Service 'Remote Procedure Call Locator' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Removable Storage) => {"changed": false, "exists": false, "failed": true, "item": "Removable Storage", "msg": "Service 'Removable Storage' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item=Secondary Logon)[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item=Server)[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item=TCP/IP NetBIOS Helper)[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Universal Plug and Play Device Host) => {"changed": false, "exists": false, "failed": true, "item": "Universal Plug and Play Device Host", "msg": "Service 'Universal Plug and Play Device Host' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=User Privilege Service) => {"changed": false, "exists": false, "failed": true, "item": "User Privilege Service", "msg": "Service 'User Privilege Service' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Human Interface Device Access) => {"changed": false, "exists": false, "failed": true, "item": "Human Interface Device Access", "msg": "Service 'Human Interface Device Access' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=IMAPI CD-Burning COM Service) => {"changed": false, "exists": false, "failed": true, "item": "IMAPI CD-Burning COM Service", "msg": "Service 'IMAPI CD-Burning COM Service' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=IPSEC Services) => {"changed": false, "exists": false, "failed": true, "item": "IPSEC Services", "msg": "Service 'IPSEC Services' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=MS Software Shadow Copy Provider) => {"changed": false, "exists": false, "failed": true, "item": "MS Software Shadow Copy Provider", "msg": "Service 'MS Software Shadow Copy Provider' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Portable Media Serial Number Service) => {"changed": false, "exists": false, "failed": true, "item": "Portable Media Serial Number Service", "msg": "Service 'Portable Media Serial Number Service' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Remote Procedure Call Locator) => {"changed": false, "exists": false, "failed": true, "item": "Remote Procedure Call Locator", "msg": "Service 'Remote Procedure Call Locator' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item=Routing and Remote Access)[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item=TCP/IP NetBIOS Helper)[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Universal Plug and Play Device Host) => {"changed": false, "exists": false, "failed": true, "item": "Universal Plug and Play Device Host", "msg": "Service 'Universal Plug and Play Device Host' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=User Privilege Service) => {"changed": false, "exists": false, "failed": true, "item": "User Privilege Service", "msg": "Service 'User Privilege Service' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: failed: [10.1.5.100] (item=Windows Image Acquisition) => {"changed": false, "exists": false, "failed": true, "item": "Windows Image Acquisition", "msg": "Service 'Windows Image Acquisition' is not installed, need to set 'path' to create a new service"}[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item=Workstation)[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item=Remote Registry)[0m
+[0;32m    azure-arm: ...ignoring[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Disable IGMP] *****************************[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Disable IPV6] *****************************[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : IE 64-bit tab] ****************************[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Run antimalware programs against ActiveX controls] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Disable IE add-ons] ***********************[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Turn off the Security Settings Check feature is not disabled] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Disable IE ESC for for administrator user] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Disable SSLv2 support on IE on Server] ****[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Disable SSLv3 support on IE on Server] ****[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Disable SSLv2 support on IE on Client] ****[0m
+[0;32m    azure-arm: ok: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Disable SSLv3 support on IE on Server] ****[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Configure Internet Proxy] *****************[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item={u'd': u'', u't': u'string', u'v': u'ProxyServer'})[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item={u'd': u'', u't': u'string', u'v': u'ProxyOverride'})[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item={u'd': 1, u't': u'dword', u'v': u'ProxyEnable'})[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Disable Internet Proxy] *******************[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'd': 0, u't': u'dword', u'v': u'ProxyEnable'})[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Configure Internet Proxy] *****************[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item={u'd': u'', u't': u'string', u'v': u'ProxyServer'})[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item={u'd': u'', u't': u'string', u'v': u'ProxyOverride'})[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item={u'd': 1, u't': u'dword', u'v': u'ProxyEnable'})[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Disable Internet Proxy] *******************[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item={u'd': 0, u't': u'dword', u'v': u'ProxyEnable'})[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Disable Older SMB] ************************[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item=SMB1)[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Enable SmbServerNameHardeningLevel - SPN validation] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Enable requiresecuritysignature - SMB signature] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : enable module logging - PowerShell5] ******[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : enable module logging - PowerShell5 (2)] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : enable transcription - PowerShell5 (2)] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item=HKLM:\SOFTWARE\Wow6432Node)[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item=HKLM:\SOFTWARE)[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Create directory structure] ***************[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : setup permissions script for Transcript directory] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Validate permissions for Transcript directory] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : enable transcription - PowerShell5 (3)] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item=HKLM:\SOFTWARE\Wow6432Node)[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item=HKLM:\SOFTWARE)[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Get WMI Tracing state] ********************[0m
+[0;32m    azure-arm: ok: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Enabling WMI Tracing] *********************[0m
+[0;32m    azure-arm: [WARNING]: when statements should not include jinja2 templating delimiters[0m
+[0;32m    azure-arm: such as {{ }} or {% %}. Found: wmilogging.stdout.find("enabled{{ ':' }} false")[0m
+[0;32m    azure-arm: != -1[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Disabling Microsoft account logon sign-in option, eg. logging in without having to use local credentials and using microsoft online accounts] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Disable Windows Store - Ensure Turn off Automatic Download and Install ofupdates is set to Disabled] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'd': 4, u'v': u'AutoDownload'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'd': 1, u'v': u'DisableOSUpgrade'})[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Disable indexing encrypted files] *********[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : check if EMET template present] ***********[0m
+[0;32m    azure-arm: ok: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : EMET Configuration] ***********************[0m
+[0;32m    azure-arm: skipping: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Win | FeatureLockDown Acrobat reader] *****[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 1, u'value': u'bProtectedMode'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 2, u'value': u'iProtectedView'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 1, u'value': u'bEnhancedSecurityStandalone'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 1, u'value': u'bEnhancedSecurityInBrowser'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 1, u'value': u'bDisableOSTrustedSites'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 1, u'value': u'bDisableTrustedFolders'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 1, u'value': u'bDisableTrustedSites'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 0, u'value': u'bEnableCertificateBasedTrust'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 0, u'value': u'iFileAttachmentPerms'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 1, u'value': u'bDisableJavaScript'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 1, u'value': u'bCommercialPDF'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 1, u'value': u'bRegisterProduct'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 1, u'value': u'bShowAdsAllow'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 1, u'value': u'bPurchaseAcro'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 1, u'value': u'bShowEbookMenu'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 1, u'value': u'bUsageMeasurement'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 1, u'value': u'bDisablePDFHandlerSwitching'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 0, u'value': u'bEnableFlash'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 0, u'value': u'bEnable3D'})[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : FeatureLockDown Acrobat reader - 64bits] ***[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item={u'data': 1, u'value': u'bProtectedMode'})[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item={u'data': 2, u'value': u'iProtectedView'})[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item={u'data': 1, u'value': u'bEnhancedSecurityStandalone'})[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item={u'data': 1, u'value': u'bEnhancedSecurityInBrowser'})[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item={u'data': 1, u'value': u'bDisableOSTrustedSites'})[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item={u'data': 1, u'value': u'bDisableTrustedFolders'})[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item={u'data': 1, u'value': u'bDisableTrustedSites'})[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item={u'data': 0, u'value': u'bEnableCertificateBasedTrust'})[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item={u'data': 0, u'value': u'iFileAttachmentPerms'})[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item={u'data': 1, u'value': u'bDisableJavaScript'})[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item={u'data': 1, u'value': u'bCommercialPDF'})[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item={u'data': 1, u'value': u'bRegisterProduct'})[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item={u'data': 1, u'value': u'bShowAdsAllow'})[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item={u'data': 1, u'value': u'bPurchaseAcro'})[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item={u'data': 1, u'value': u'bShowEbookMenu'})[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item={u'data': 1, u'value': u'bUsageMeasurement'})[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item={u'data': 1, u'value': u'bDisablePDFHandlerSwitching'})[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item={u'data': 0, u'value': u'bEnableFlash'})[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => (item={u'data': 0, u'value': u'bEnable3D'})[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : win_regedit] ******************************[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'datatype': u'dword', u'data': 3, u'value': u'iUnlistedAttachmentTypePerm'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'datatype': u'string', u'data': u'version:1|.docx:2|.xls:2|.exe:3|.hs:3', u'value': u'tBuiltInPermList'})[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : win_regedit] ******************************[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 0, u'value': u'bDisableTemporaryFileProtectedView'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 0, u'value': u'bEnableAlwaysOutlookAttachmentProtectedView'})[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : win_regedit] ******************************[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 0, u'value': u'bEnableAcrobatHS'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 0, u'value': u'bEnableRTCPart'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 0, u'value': u'bEnableRTCAuth'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 0, u'value': u'bEnableShareFile'})[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 0, u'value': u'bEnableDocCtrInit'})[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : win_regedit] ******************************[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 1, u'value': u'bDisableADCFileStore'})[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : win_regedit] ******************************[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 1, u'value': u'bEnableSignPane'})[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : win_regedit] ******************************[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': 1, u'value': u'bDisableWebmail'})[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : win_regedit] ******************************[0m
+[0;32m    azure-arm: changed: [10.1.5.100] => (item={u'data': u'c:\\temp\\BrokerLogfile.log', u'value': u'tBrokerLogfilePath'})[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : ensure flash config dir exists] ***********[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Win | (try to) harden flash] **************[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : win_stat] *********************************[0m
+[0;32m    azure-arm: skipping: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Download NXLog CE] ************************[0m
+[0;32m    azure-arm: skipping: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Install NXLog CE] *************************[0m
+[0;32m    azure-arm: skipping: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : check if WMI_Monitor archive is present] ***[0m
+[0;32m    azure-arm: ok: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Download WMI_Monitor] *********************[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Run WMIMonitor] ***************************[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : debug] ************************************[0m
+[0;32m    azure-arm: ok: [10.1.5.100] => {[0m
+[0;32m    azure-arm: "wmiout": {[0m
+[0;32m    azure-arm: "changed": true,[0m
+[0;32m    azure-arm: "cmd": "PowerShell.exe -ExecutionPolicy Bypass -File c:\\harden_log\\WMIMonitor.ps1",[0m
+[0;32m    azure-arm: "delta": "0:00:00.423876",[0m
+[0;32m    azure-arm: "end": "2017-07-25 05:43:30.490549",[0m
+[0;32m    azure-arm: "rc": 0,[0m
+[0;32m    azure-arm: "start": "2017-07-25 05:43:30.066672",[0m
+[0;32m    azure-arm: "stderr": "",[0m
+[0;32m    azure-arm: "stderr_lines": [],[0m
+[0;32m    azure-arm: "stdout": "",[0m
+[0;32m    azure-arm: "stdout_lines": [][0m
+[0;32m    azure-arm: }[0m
+[0;32m    azure-arm: }[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Firewall | allow svchost dns and ntp requests out] ***[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=53)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=123)[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Firewall | block outgoing program] ********[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=C:\Program Files\Microsoft Office\Office14\winword.exe)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=C:\Program Files\Microsoft Office\Office14\excel.exe)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=C:\Program Files\Microsoft Office\Office14\powerpoint.exe)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=C:\Program Files\Microsoft Office\Office14\msaccess.exe)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=%SystemRoot%\System32\wscript.exe)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=%SystemRoot%\Syswow64\wscript.exe)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=%SystemRoot%\System32\cscript.exe)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=%SystemRoot%\Syswow64\cscript.exe)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=%SystemRoot%\system32\mshta.exe)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=%SystemRoot%\SysWOW64\WindowsPowerShell\v1.0\powershell.exe)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=%SystemRoot%\system32\cmd.exe)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=msiexec.exe)[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Firewall | allow outgoing program] ********[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=%ProgramFiles\firefox.exe)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=%ProgramFiles%\Google\Chrome\Application\chrome.exe)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=%windir%\SystemApps\Microsoft.MicrosoftEdge_8wekyb3d8bbwe\MicrosoftEdge.exe)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=microsoftupdate.exe)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=%windir%\System32\BackgroundTransferHost.exe)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=%ProgramFiles%\bitbeans\Simple DNSCrypt\dnscrypt-proxy\dnscrypt-proxy.exe)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=%ProgramFiles%\bitbeans\Simple DNSCrypt\dnscrypt-proxy\dnscrypt-proxy-secondary.exe)[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Firewall | block outgoing ports] **********[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=25)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=587)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=53)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=123)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=6881-6889)[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Firewall | allow outgoing ports] **********[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Firewall | block incoming ports] **********[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=25)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=587)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=80)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=443)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=8080)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=53)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=123)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=6881-6889)[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : debug] ************************************[0m
+[0;32m    azure-arm: skipping: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Firewall | disable rules] *****************[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=Xbox)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=Xbox Game UI)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=Xbox Identity Provider)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=Cortana)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=Candy Crush Soda Saga)[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Firewall reconfigure logging] *************[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=netsh advfirewall set currentprofile logging maxfilesize 32767)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=netsh advfirewall set currentprofile logging droppedconnections enable)[0m
+[0;32m    azure-arm: skipping: [10.1.5.100] => (item=netsh advfirewall set currentprofile logging allowedconnections enable)[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : check if mbrfilter archive is present] ****[0m
+[0;32m    azure-arm: skipping: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Download mbrfilter] ***********************[0m
+[0;32m    azure-arm: skipping: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Uncompress mbrfilter] *********************[0m
+[0;32m    azure-arm: skipping: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Install mbrfilter driver] *****************[0m
+[0;32m    azure-arm: skipping: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : debug] ************************************[0m
+[0;32m    azure-arm: skipping: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Win10 | Remove Cortana package] ***********[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : Disable DMA] ******************************[0m
+[0;32m    azure-arm: skipping: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-first : clean the ansible configuration script] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Configure System Event Log (Application) | windows-audit-100] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Configure System Event Log (Security) | windows-audit-101] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Configure System Event Log (Setup) | windows-audit-102] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Configure System Event Log (System) | windows-audit-103] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Account Logon Audit Log | windows-audit-203] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Audit Application Group Management | windows-audit-204] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Audit Computer Account Management | windows-audit-205] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Audit Application Group Management | windows-audit-206] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Account Management Audit Log | windows-audit-207] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Logon Logoff Audit Log | windows-audit-208] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : DS Access Audit Log | windows-audit-209] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Object Access Audit Log | windows-audit-210] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Policy Change Audit Log | windows-audit-211] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Privilege Use Audit Log | windows-audit-212] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : System Audit Log | windows-audit-213] ****[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Process Tracking Log | windows-audit-213] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : IE 64-bit tab | windows-ie-101] **********[0m
+[0;32m    azure-arm: ok: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Run antimalware programs against ActiveX controls | windows-ie-102] ***[0m
+[0;32m    azure-arm: ok: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Microsoft Online Accounts | microsoft-online-accounts] ***[0m
+[0;32m    azure-arm: ok: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Disable Windows Store | disable-windows-store] ***[0m
+[0;32m    azure-arm: ok: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Ensure Turn off Automatic Download and Install of Updates is set to Disabled] ***[0m
+[0;32m    azure-arm: ok: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Disable indexing encrypted files | disable-index-encrypted-files] ***[0m
+[0;32m    azure-arm: ok: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Set Enforce password history to 24 or more passwords | cis enforce-password-history 1.1.1] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Set Maximum  password age to 45 or more days | cis minimum-password-age 1.1.2] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Set Minimum password age to 1 or more days | cis minimum-password-age 1.1.3] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Set Minimum password length to 14 or more characters | cis minimum-password-length 1.1.4] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Set Lockout Duration | cis account-lockout 1.1.5] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Set Lockout Window | cis account-window 1.1.6] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Set Lockout Threshold | cis account-window 1.1.7] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Powershell ScriptBlock Logging | powershell-script-blocklogging] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Powershell Transcription | powershell-transcription] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Windows Remote Desktop Configured to Always Prompt for Password | windows-rdp-100] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-harden-windows-second : Strong Encryption for Windows Remote Desktop Required | windows-rdp-101] ***[0m
+[0;32m    azure-arm: changed: [10.1.5.100][0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: PLAY RECAP *********************************************************************[0m
+[0;32m    azure-arm: 10.1.5.100                 : ok=85   changed=71   unreachable=0    failed=0[0m
+[0;32m    azure-arm:[0m
+[1;32m==> azure-arm: Provisioning with windows-shell...[0m
+[1;32m==> azure-arm: Provisioning with shell script: /tmp/packer-windows-shell-provisioner679901067[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: C:\Users\packer>net user osadmin /delete[0m
+[0;32m    azure-arm: The command completed successfully.[0m
+[0;32m    azure-arm:[0m
+[1;32m==> azure-arm: Provisioning with Powershell...[0m
+[1;32m==> azure-arm: Provisioning with shell script: /tmp/packer-powershell-provisioner145767405[0m
+[1;32m==> azure-arm: Querying the machine's properties ...[0m
+[1;32m==> azure-arm:  -> ResourceGroupName : 'packer-Resource-Group-kn1dwbm3fq'[0m
+[1;32m==> azure-arm:  -> ComputeName       : 'pkrvmkn1dwbm3fq'[0m
+[1;32m==> azure-arm:  -> Managed OS Disk   : '/subscriptions/890e6987-d453-43b2-aa5e-139603074899/resourceGroups/packer-Resource-Group-kn1dwbm3fq/providers/Microsoft.Compute/disks/osdisk'[0m
+[1;32m==> azure-arm: Powering off machine ...[0m
+[1;32m==> azure-arm:  -> ResourceGroupName : 'packer-Resource-Group-kn1dwbm3fq'[0m
+[1;32m==> azure-arm:  -> ComputeName       : 'pkrvmkn1dwbm3fq'[0m
+[1;32m==> azure-arm: Capturing image ...[0m
+[1;32m==> azure-arm:  -> Compute ResourceGroupName : 'packer-Resource-Group-kn1dwbm3fq'[0m
+[1;32m==> azure-arm:  -> Compute Name              : 'pkrvmkn1dwbm3fq'[0m
+[1;32m==> azure-arm:  -> Compute Location          : 'Australia East'[0m
+[1;32m==> azure-arm:  -> Image ResourceGroupName   : 'eyc3wintestrg'[0m
+[1;32m==> azure-arm:  -> Image Name                : 'WINDOWS_PACKER_22567'[0m
+[1;32m==> azure-arm:  -> Image Location            : 'australiaeast'[0m
+[1;32m==> azure-arm: Deleting resource group ...[0m
+[1;32m==> azure-arm:  -> ResourceGroupName : 'packer-Resource-Group-kn1dwbm3fq'[0m
+[1;32m==> azure-arm: Deleting the temporary OS disk ...[0m
+[1;32m==> azure-arm:  -> OS Disk : skipping, managed disk was used...[0m
+[1;32mBuild 'azure-arm' finished.[0m
+
+==> Builds finished. The artifacts of successful builds are:
+--> azure-arm: Azure.ResourceManagement.VMImage:
+
+ManagedImageResourceGroupName: eyc3wintestrg
+ManagedImageName: WINDOWS_PACKER_22567
+ManagedImageLocation: australiaeast
+

@@ -1,0 +1,169 @@
+OS Version
+=================================
+IMAGE_PUBLISHER : canonical
+IMAGE_OFFER : UbuntuServer
+IMAGE_SKU : 16.04.0-LTS
+IMAGE_VERSION : latest
+=================================
+                     
+                     
+[1;32mazure-arm output will be in this color.[0m
+
+[1;32m==> azure-arm: Running builder ...[0m
+[0;32m    azure-arm: Creating Azure Resource Manager (ARM) client ...[0m
+[1;32m==> azure-arm: Creating resource group ...[0m
+[1;32m==> azure-arm:  -> ResourceGroupName : 'packer-Resource-Group-263wy2nhkk'[0m
+[1;32m==> azure-arm:  -> Location          : 'Australia East'[0m
+[1;32m==> azure-arm:  -> Tags              :[0m
+[1;32m==> azure-arm: Validating deployment template ...[0m
+[1;32m==> azure-arm:  -> ResourceGroupName : 'packer-Resource-Group-263wy2nhkk'[0m
+[1;32m==> azure-arm:  -> DeploymentName    : 'pkrdp263wy2nhkk'[0m
+[1;32m==> azure-arm: Deploying deployment template ...[0m
+[1;32m==> azure-arm:  -> ResourceGroupName : 'packer-Resource-Group-263wy2nhkk'[0m
+[1;32m==> azure-arm:  -> DeploymentName    : 'pkrdp263wy2nhkk'[0m
+[1;32m==> azure-arm: Getting the VM's IP address ...[0m
+[1;32m==> azure-arm:  -> ResourceGroupName   : 'packer-Resource-Group-263wy2nhkk'[0m
+[1;32m==> azure-arm:  -> PublicIPAddressName : 'packerPublicIP'[0m
+[1;32m==> azure-arm:  -> NicName             : 'packerNic'[0m
+[1;32m==> azure-arm:  -> Network Connection  : 'PublicEndpoint'[0m
+[1;32m==> azure-arm:  -> IP Address          : '13.75.157.7'[0m
+[1;32m==> azure-arm: Waiting for SSH to become available...[0m
+[1;32m==> azure-arm: Connected to SSH![0m
+[1;32m==> azure-arm: Provisioning with shell script: scripts/ansible.sh[0m
+[0;32m    azure-arm: Hit:1 http://azure.archive.ubuntu.com/ubuntu xenial InRelease[0m
+[0;32m    azure-arm: Get:2 http://azure.archive.ubuntu.com/ubuntu xenial-updates InRelease [102 kB][0m
+[0;32m    azure-arm: Get:3 http://azure.archive.ubuntu.com/ubuntu xenial-backports InRelease [102 kB][0m
+[0;32m    azure-arm: Get:4 http://security.ubuntu.com/ubuntu xenial-security InRelease [102 kB][0m
+[0;32m    azure-arm: Get:5 http://azure.archive.ubuntu.com/ubuntu xenial/main Sources [868 kB][0m
+[0;32m    azure-arm: Get:6 http://azure.archive.ubuntu.com/ubuntu xenial/restricted Sources [4,808 B][0m
+[0;32m    azure-arm: Get:7 http://azure.archive.ubuntu.com/ubuntu xenial/universe Sources [7,728 kB][0m
+[0;32m    azure-arm: Get:8 http://security.ubuntu.com/ubuntu xenial-security/main Sources [80.6 kB][0m
+[0;32m    azure-arm: Get:9 http://azure.archive.ubuntu.com/ubuntu xenial/multiverse Sources [179 kB][0m
+[0;32m    azure-arm: Get:10 http://azure.archive.ubuntu.com/ubuntu xenial-updates/main Sources [260 kB][0m
+[0;32m    azure-arm: Get:11 http://azure.archive.ubuntu.com/ubuntu xenial-updates/restricted Sources [3,012 B][0m
+[0;32m    azure-arm: Get:12 http://azure.archive.ubuntu.com/ubuntu xenial-updates/universe Sources [165 kB][0m
+[0;32m    azure-arm: Get:13 http://azure.archive.ubuntu.com/ubuntu xenial-updates/multiverse Sources [6,948 B][0m
+[0;32m    azure-arm: Get:14 http://azure.archive.ubuntu.com/ubuntu xenial-updates/main amd64 Packages [584 kB][0m
+[0;32m    azure-arm: Get:15 http://azure.archive.ubuntu.com/ubuntu xenial-updates/main Translation-en [236 kB][0m
+[0;32m    azure-arm: Get:16 http://azure.archive.ubuntu.com/ubuntu xenial-updates/restricted amd64 Packages [7,804 B][0m
+[0;32m    azure-arm: Get:17 http://azure.archive.ubuntu.com/ubuntu xenial-updates/restricted Translation-en [2,548 B][0m
+[0;32m    azure-arm: Get:18 http://azure.archive.ubuntu.com/ubuntu xenial-updates/universe amd64 Packages [507 kB][0m
+[0;32m    azure-arm: Get:19 http://azure.archive.ubuntu.com/ubuntu xenial-updates/universe Translation-en [197 kB][0m
+[0;32m    azure-arm: Get:20 http://security.ubuntu.com/ubuntu xenial-security/restricted Sources [2,604 B][0m
+[0;32m    azure-arm: Get:21 http://azure.archive.ubuntu.com/ubuntu xenial-updates/multiverse amd64 Packages [14.9 kB][0m
+[0;32m    azure-arm: Get:22 http://azure.archive.ubuntu.com/ubuntu xenial-updates/multiverse Translation-en [7,476 B][0m
+[0;32m    azure-arm: Get:23 http://azure.archive.ubuntu.com/ubuntu xenial-backports/main Sources [3,312 B][0m
+[0;32m    azure-arm: Get:24 http://azure.archive.ubuntu.com/ubuntu xenial-backports/universe Sources [4,404 B][0m
+[0;32m    azure-arm: Get:25 http://azure.archive.ubuntu.com/ubuntu xenial-backports/main amd64 Packages [4,680 B][0m
+[0;32m    azure-arm: Get:26 http://azure.archive.ubuntu.com/ubuntu xenial-backports/main Translation-en [3,216 B][0m
+[0;32m    azure-arm: Get:27 http://azure.archive.ubuntu.com/ubuntu xenial-backports/universe amd64 Packages [5,808 B][0m
+[0;32m    azure-arm: Get:28 http://azure.archive.ubuntu.com/ubuntu xenial-backports/universe Translation-en [3,004 B][0m
+[0;32m    azure-arm: Get:29 http://security.ubuntu.com/ubuntu xenial-security/universe Sources [36.6 kB][0m
+[0;32m    azure-arm: Get:30 http://security.ubuntu.com/ubuntu xenial-security/multiverse Sources [1,144 B][0m
+[0;32m    azure-arm: Get:31 http://security.ubuntu.com/ubuntu xenial-security/main amd64 Packages [311 kB][0m
+[0;32m    azure-arm: Get:32 http://security.ubuntu.com/ubuntu xenial-security/main Translation-en [131 kB][0m
+[0;32m    azure-arm: Get:33 http://security.ubuntu.com/ubuntu xenial-security/restricted amd64 Packages [7,420 B][0m
+[0;32m    azure-arm: Get:34 http://security.ubuntu.com/ubuntu xenial-security/restricted Translation-en [2,428 B][0m
+[0;32m    azure-arm: Get:35 http://security.ubuntu.com/ubuntu xenial-security/universe amd64 Packages [148 kB][0m
+[0;32m    azure-arm: Get:36 http://security.ubuntu.com/ubuntu xenial-security/universe Translation-en [76.4 kB][0m
+[0;32m    azure-arm: Get:37 http://security.ubuntu.com/ubuntu xenial-security/multiverse amd64 Packages [2,748 B][0m
+[0;32m    azure-arm: Get:38 http://security.ubuntu.com/ubuntu xenial-security/multiverse Translation-en [1,232 B][0m
+[0;32m    azure-arm: Fetched 11.9 MB in 16s (738 kB/s)[0m
+[0;32m    azure-arm: Reading package lists... Done[0m
+[0;32m    azure-arm: Reading package lists... Done[0m
+[0;32m    azure-arm: Building dependency tree[0m
+[0;32m    azure-arm: Reading state information... Done[0m
+[0;32m    azure-arm: The following additional packages will be installed:[0m
+[0;32m    azure-arm: ieee-data python-ecdsa python-httplib2 python-jinja2 python-markupsafe[0m
+[0;32m    azure-arm: python-netaddr python-paramiko python-pkg-resources python-selinux[0m
+[0;32m    azure-arm: python-six python-yaml[0m
+[0;32m    azure-arm: Suggested packages:[0m
+[0;32m    azure-arm: sshpass python-jinja2-doc ipython python-netaddr-docs python-setuptools[0m
+[0;32m    azure-arm: The following NEW packages will be installed:[0m
+[0;32m    azure-arm: ansible ieee-data python-ecdsa python-httplib2 python-jinja2[0m
+[0;32m    azure-arm: python-markupsafe python-netaddr python-paramiko python-pkg-resources[0m
+[0;32m    azure-arm: python-selinux python-six python-yaml[0m
+[0;32m    azure-arm: 0 upgraded, 12 newly installed, 0 to remove and 186 not upgraded.[0m
+[0;32m    azure-arm: Need to get 2,494 kB/2,718 kB of archives.[0m
+[0;32m    azure-arm: After this operation, 16.4 MB of additional disk space will be used.[0m
+[0;32m    azure-arm: Get:1 http://azure.archive.ubuntu.com/ubuntu xenial/main amd64 python-markupsafe amd64 0.23-2build2 [15.5 kB][0m
+[0;32m    azure-arm: Get:2 http://azure.archive.ubuntu.com/ubuntu xenial/main amd64 python-jinja2 all 2.8-1 [109 kB][0m
+[0;32m    azure-arm: Get:3 http://azure.archive.ubuntu.com/ubuntu xenial/main amd64 python-ecdsa all 0.13-2 [34.0 kB][0m
+[0;32m    azure-arm: Get:4 http://azure.archive.ubuntu.com/ubuntu xenial/main amd64 python-paramiko all 1.16.0-1 [109 kB][0m
+[0;32m    azure-arm: Get:5 http://azure.archive.ubuntu.com/ubuntu xenial/main amd64 python-httplib2 all 0.9.1+dfsg-1 [34.2 kB][0m
+[0;32m    azure-arm: Get:6 http://azure.archive.ubuntu.com/ubuntu xenial/main amd64 ieee-data all 20150531.1 [830 kB][0m
+[0;32m    azure-arm: Get:7 http://azure.archive.ubuntu.com/ubuntu xenial/main amd64 python-netaddr all 0.7.18-1 [174 kB][0m
+[0;32m    azure-arm: Get:8 http://azure.archive.ubuntu.com/ubuntu xenial-updates/universe amd64 ansible all 2.0.0.2-2ubuntu1 [1,016 kB][0m
+[0;32m    azure-arm: Get:9 http://azure.archive.ubuntu.com/ubuntu xenial/universe amd64 python-selinux amd64 2.4-3build2 [173 kB][0m
+[0;32m    azure-arm: Fetched 2,494 kB in 0s (4,311 kB/s)[0m
+[0;32m    azure-arm: Selecting previously unselected package python-markupsafe.[0m
+[0;32m    azure-arm: (Reading database ... 61252 files and directories currently installed.)[0m
+[0;32m    azure-arm: Preparing to unpack .../python-markupsafe_0.23-2build2_amd64.deb ...[0m
+[0;32m    azure-arm: Unpacking python-markupsafe (0.23-2build2) ...[0m
+[0;32m    azure-arm: Selecting previously unselected package python-jinja2.[0m
+[0;32m    azure-arm: Preparing to unpack .../python-jinja2_2.8-1_all.deb ...[0m
+[0;32m    azure-arm: Unpacking python-jinja2 (2.8-1) ...[0m
+[0;32m    azure-arm: Selecting previously unselected package python-six.[0m
+[0;32m    azure-arm: Preparing to unpack .../python-six_1.10.0-3_all.deb ...[0m
+[0;32m    azure-arm: Unpacking python-six (1.10.0-3) ...[0m
+[0;32m    azure-arm: Selecting previously unselected package python-ecdsa.[0m
+[0;32m    azure-arm: Preparing to unpack .../python-ecdsa_0.13-2_all.deb ...[0m
+[0;32m    azure-arm: Unpacking python-ecdsa (0.13-2) ...[0m
+[0;32m    azure-arm: Selecting previously unselected package python-paramiko.[0m
+[0;32m    azure-arm: Preparing to unpack .../python-paramiko_1.16.0-1_all.deb ...[0m
+[0;32m    azure-arm: Unpacking python-paramiko (1.16.0-1) ...[0m
+[0;32m    azure-arm: Selecting previously unselected package python-pkg-resources.[0m
+[0;32m    azure-arm: Preparing to unpack .../python-pkg-resources_20.7.0-1_all.deb ...[0m
+[0;32m    azure-arm: Unpacking python-pkg-resources (20.7.0-1) ...[0m
+[0;32m    azure-arm: Selecting previously unselected package python-yaml.[0m
+[0;32m    azure-arm: Preparing to unpack .../python-yaml_3.11-3build1_amd64.deb ...[0m
+[0;32m    azure-arm: Unpacking python-yaml (3.11-3build1) ...[0m
+[0;32m    azure-arm: Selecting previously unselected package python-httplib2.[0m
+[0;32m    azure-arm: Preparing to unpack .../python-httplib2_0.9.1+dfsg-1_all.deb ...[0m
+[0;32m    azure-arm: Unpacking python-httplib2 (0.9.1+dfsg-1) ...[0m
+[0;32m    azure-arm: Selecting previously unselected package ieee-data.[0m
+[0;32m    azure-arm: Preparing to unpack .../ieee-data_20150531.1_all.deb ...[0m
+[0;32m    azure-arm: Unpacking ieee-data (20150531.1) ...[0m
+[0;32m    azure-arm: Selecting previously unselected package python-netaddr.[0m
+[0;32m    azure-arm: Preparing to unpack .../python-netaddr_0.7.18-1_all.deb ...[0m
+[0;32m    azure-arm: Unpacking python-netaddr (0.7.18-1) ...[0m
+[0;32m    azure-arm: Selecting previously unselected package ansible.[0m
+[0;32m    azure-arm: Preparing to unpack .../ansible_2.0.0.2-2ubuntu1_all.deb ...[0m
+[0;32m    azure-arm: Unpacking ansible (2.0.0.2-2ubuntu1) ...[0m
+[0;32m    azure-arm: Selecting previously unselected package python-selinux.[0m
+[0;32m    azure-arm: Preparing to unpack .../python-selinux_2.4-3build2_amd64.deb ...[0m
+[0;32m    azure-arm: Unpacking python-selinux (2.4-3build2) ...[0m
+[0;32m    azure-arm: Processing triggers for man-db (2.7.5-1) ...[0m
+[0;32m    azure-arm: Setting up python-markupsafe (0.23-2build2) ...[0m
+[0;32m    azure-arm: Setting up python-jinja2 (2.8-1) ...[0m
+[0;32m    azure-arm: Setting up python-six (1.10.0-3) ...[0m
+[0;32m    azure-arm: Setting up python-ecdsa (0.13-2) ...[0m
+[0;32m    azure-arm: Setting up python-paramiko (1.16.0-1) ...[0m
+[0;32m    azure-arm: Setting up python-pkg-resources (20.7.0-1) ...[0m
+[0;32m    azure-arm: Setting up python-yaml (3.11-3build1) ...[0m
+[0;32m    azure-arm: Setting up python-httplib2 (0.9.1+dfsg-1) ...[0m
+[0;32m    azure-arm: Setting up ieee-data (20150531.1) ...[0m
+[0;32m    azure-arm: Setting up python-netaddr (0.7.18-1) ...[0m
+[0;32m    azure-arm: Setting up ansible (2.0.0.2-2ubuntu1) ...[0m
+[0;32m    azure-arm: Setting up python-selinux (2.4-3build2) ...[0m
+[1;32m==> azure-arm: Provisioning with Ansible...[0m
+[0;32m    azure-arm: Creating Ansible staging directory...[0m
+[0;32m    azure-arm: Creating directory: /tmp/packer-provisioner-ansible-local/59772731-9e12-3c97-cade-01c816380d60[0m
+[0;32m    azure-arm: Uploading main Playbook file...[0m
+[0;32m    azure-arm: Uploading inventory file...[0m
+[0;32m    azure-arm: Uploading role directories...[0m
+[0;32m    azure-arm: Creating directory: /tmp/packer-provisioner-ansible-local/59772731-9e12-3c97-cade-01c816380d60/roles/ansible-role-hardening-master[0m
+[0;32m    azure-arm: Executing Ansible: cd /tmp/packer-provisioner-ansible-local/59772731-9e12-3c97-cade-01c816380d60 && ANSIBLE_FORCE_COLOR=1 PYTHONUNBUFFERED=1 ansible-playbook /tmp/packer-provisioner-ansible-local/59772731-9e12-3c97-cade-01c816380d60/main.yml --extra-vars "packer_build_name=azure-arm packer_builder_type=azure-arm packer_http_addr="  -c local -i /tmp/packer-provisioner-ansible-local/59772731-9e12-3c97-cade-01c816380d60/packer-provisioner-ansible-local209782068[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: PLAY ***************************************************************************[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [setup] *******************************************************************[0m
+[0;32m    azure-arm: [0;32mok: [127.0.0.1][0m[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-role-hardening-master : include] *********************************[0m
+[0;32m    azure-arm: [0;36mincluded: /tmp/packer-provisioner-ansible-local/59772731-9e12-3c97-cade-01c816380d60/roles/ansible-role-hardening-master/tasks/01_osupdate.yml for 127.0.0.1[0m[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-role-hardening-master : apt update] ******************************[0m
+[0;32m    azure-arm: [0;32mok: [127.0.0.1][0m[0m
+[0;32m    azure-arm:[0m
+[0;32m    azure-arm: TASK [ansible-role-hardening-master : apt upgrade] *****************************[0m
